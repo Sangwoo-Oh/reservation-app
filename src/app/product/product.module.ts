@@ -5,14 +5,15 @@ import { ProductListComponent } from './product-listings/product-listings.compon
 import { CommonModule } from "@angular/common";
 import { ProductComponent } from './product.component';
 import { ProductService } from './shared/product.service';
+import { AuthGuard } from '../auth/shared/auth.guard';
 
 
 const routes: Routes = [
   {
     path: 'products', component: ProductComponent,
     children: [
-      { path: '', component: ProductListComponent },
-      { path: ':productId', component: ProductDetailComponent }
+      { path: '', component: ProductListComponent, canActivate: [AuthGuard] },
+      { path: ':productId', component: ProductDetailComponent, canActivate: [AuthGuard] }
     ]
   }
 ];
